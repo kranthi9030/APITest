@@ -1,0 +1,284 @@
+{
+	"info": {
+		"_postman_id": "f464d85f-2739-4ee0-ab80-f0322ce44ef0",
+		"name": "CMD_Jenkins",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET_Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" pm.test(\"Validation id\", function () {\r",
+							"           pm.expect(pm.response.text()).to.include(\"10\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"validation firstname\", function () {\r",
+							"pm.expect(pm.response.json().data[0].first_name).to.be.an(\"string\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"header Content-Type  KEY is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"header value Content-Type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", () => {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"//current env\r",
+							"//pm.test(\"Check the active environment\", () => {\r",
+							"  //pm.expect(pm.environment.name).to.eql(\"SIT2\");\r",
+							"//});\r",
+							"\r",
+							"//clear an environment variable\r",
+							"postman.clearEnvironmentVariable(\"Setup\");\r",
+							"\r",
+							"//set a global variable\r",
+							"postman.setGlobalVariable(\"hi\", \"Test\");\r",
+							"\r",
+							"//get a global variable\r",
+							"postman.getGlobalVariable(\"hi\");\r",
+							"\r",
+							"console.log(\"get the global varible \" + postman.getGlobalVariable(\"hi\"));\r",
+							"\r",
+							"postman.getEnvironmentVariable(\"SITURL\");\r",
+							"\r",
+							"console.log(\"Get the enviornment variable\" + postman.getEnvironmentVariable(\"SITURL\"));\r",
+							"\r",
+							"console.log(\"print array of first object email \" + pm.response.json().data[0].email);\r",
+							"\r",
+							"console.log(\"print array of first object id \" + pm.response.json().data[0].id);\r",
+							"\r",
+							"//FOR -LOOP\r",
+							"responseJson = JSON.parse(responseBody);\r",
+							"\r",
+							"  var a=[];\r",
+							"var list = (responseJson.data).length;\r",
+							"console.log(\"length of array \" + list);\r",
+							"   for (var i = 0; i < list; i++) \r",
+							"    {\r",
+							"    var counter = responseJson.data[i];\r",
+							"\r",
+							"    UID=counter.id\r",
+							"\r",
+							"    a.push(UID)\r",
+							"        }\r",
+							"    a= JSON.stringify(a)\r",
+							"    postman.setEnvironmentVariable(\"UID\", a);\r",
+							"           pm.test(\"for loop Body matches all\", function () {\r",
+							"       pm.expect(a).to.include(\"7\");\r",
+							"\r",
+							"       console.log(\"array is \" + a)\r",
+							"\r",
+							"        if(a[5] < 13)\r",
+							"        {\r",
+							"            console.log(\"if condition working\")\r",
+							"        }\r",
+							"        else{\r",
+							"\r",
+							"            console.log(\"condition failed\")\r",
+							"        }\r",
+							"       \r",
+							"         });\r",
+							"\r",
+							"\r",
+							"pm.test(\"id is graterthan 0\", function()\r",
+							"{\r",
+							"    var jsondata=pm.response.json();\r",
+							"    pm.expect(jsondata.data[0].id).is.above(0);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{GlobalURL}}api/users?page=2",
+					"host": [
+						"{{GlobalURL}}api"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE_Users",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"QALEAD\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_Users",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE_Users",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"hii Test\")\r",
+							"\r",
+							"var reqname = \"username-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+							"\r",
+							"pm.environment.set(\"user\", reqname);\r",
+							"\r",
+							"console.log(\"user is:\" + reqname)\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{user}}\",\r\n    \"job\": \"HR\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users?page=2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
