@@ -1,0 +1,47 @@
+https://github.com/kranthi9030
+
+git@github.com:kranthi9030/APITest.git
+
+git remote add origin git@github.com:kranthi9030/APITest.git
+
+
+echo "# kranthi9030" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:kranthi9030/kranthi9030.git
+git push -u origin main
+
+
+add another file
+git add
+git commit -m "first commit"
+git branch -M main
+git push -u origin main
+
+add file another branch
+git add
+git commit -m "first commit"
+git branch -M Testbranch
+git remote
+git push -u origin 
+
+
+git@github.com:kranthi9030/APITest.githttps://github.com/kranthi9030/APITest.git
+
+https://github.com/kranthi9030/APITest.git
+
+newman run CMD_Jenkins.postman_collection.json -e workspace.postman_globals.json
+
+
+https://www.youtube.com/watch?v=sPK5QbTQeGU
+
+https://www.youtube.com/watch?v=9FOuyNt0V8I
+
+gitpull--you have alredy repository in loacal but there is no chnage 
+new changes are there in new repository if u want git only those changes
+
+git remote
+git branch -M main
+git pull origin main
